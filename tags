@@ -1,0 +1,67 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.9~svn20110310	//
+ADMINS	./first/settings.py	/^ADMINS = ($/;"	v
+BU_NAMES	./polls/views.py	/^    BU_NAMES = ($/;"	v	class:ContactForm
+Choice	./polls/models.py	/^class Choice(models.Model):$/;"	c
+ContactForm	./polls/views.py	/^class ContactForm(forms.Form):$/;"	c
+ContactModel	./polls/models.py	/^class ContactModel(models.Model):$/;"	c
+DATABASES	./first/settings.py	/^DATABASES = {$/;"	v
+DEBUG	./first/settings.py	/^DEBUG = True$/;"	v
+HTTP_ADDRESS	./polls/views.py	/^HTTP_ADDRESS = 'http:\/\/10.140.90.27\/ccc2013\/svn\/'$/;"	v
+INSTALLED_APPS	./first/settings.py	/^INSTALLED_APPS = ($/;"	v
+LANGUAGE_CODE	./first/settings.py	/^LANGUAGE_CODE = 'en-us'$/;"	v
+LOGGING	./first/settings.py	/^LOGGING = {$/;"	v
+MANAGERS	./first/settings.py	/^MANAGERS = ADMINS$/;"	v
+MEDIA_ROOT	./first/settings.py	/^MEDIA_ROOT = ''$/;"	v
+MEDIA_URL	./first/settings.py	/^MEDIA_URL = ''$/;"	v
+MIDDLEWARE_CLASSES	./first/settings.py	/^MIDDLEWARE_CLASSES = ($/;"	v
+Poll	./polls/models.py	/^class Poll(models.Model):$/;"	c
+ROOT_URLCONF	./first/settings.py	/^ROOT_URLCONF = 'first.urls'$/;"	v
+SECRET_KEY	./first/settings.py	/^SECRET_KEY = '2m(amj0w(tvp=$_kxtjliv8i(d36-(3marush@8g$iymkrta+3'$/;"	v
+SITE_ID	./first/settings.py	/^SITE_ID = 1$/;"	v
+STATICFILES_DIRS	./first/settings.py	/^STATICFILES_DIRS = ($/;"	v
+STATICFILES_FINDERS	./first/settings.py	/^STATICFILES_FINDERS = ($/;"	v
+STATIC_ROOT	./first/settings.py	/^STATIC_ROOT = ''$/;"	v
+STATIC_URL	./first/settings.py	/^STATIC_URL = '\/static\/'$/;"	v
+SVNDATA	./polls/views.py	/^SVNDATA = '\/home\/coach\/svndata\/'$/;"	v
+SimpleTest	./polls/tests.py	/^class SimpleTest(TestCase):$/;"	c
+TEMPLATE_DEBUG	./first/settings.py	/^TEMPLATE_DEBUG = DEBUG$/;"	v
+TEMPLATE_DIRS	./first/settings.py	/^TEMPLATE_DIRS = ($/;"	v
+TEMPLATE_LOADERS	./first/settings.py	/^TEMPLATE_LOADERS = ($/;"	v
+TIME_ZONE	./first/settings.py	/^TIME_ZONE = 'America\/Chicago'$/;"	v
+USE_I18N	./first/settings.py	/^USE_I18N = True$/;"	v
+USE_L10N	./first/settings.py	/^USE_L10N = True$/;"	v
+USE_TZ	./first/settings.py	/^USE_TZ = True$/;"	v
+WSGI_APPLICATION	./first/settings.py	/^WSGI_APPLICATION = 'first.wsgi.application'$/;"	v
+__unicode__	./polls/models.py	/^    def __unicode__(self):$/;"	m	class:Choice	file:
+__unicode__	./polls/models.py	/^    def __unicode__(self):$/;"	m	class:ContactModel	file:
+__unicode__	./polls/models.py	/^    def __unicode__(self):$/;"	m	class:Poll	file:
+_add_user_right_for_repository	./polls/views.py	/^def _add_user_right_for_repository(nsn_intra_id):$/;"	f
+_create_repository	./polls/views.py	/^def _create_repository(nsn_intra_id):$/;"	f
+_is_uid_employNumber_matched	./polls/views.py	/^def _is_uid_employNumber_matched(nsn_intra_id, employee_number):$/;"	f
+_notify_candicate	./polls/views.py	/^def _notify_candicate(to, msg_body):$/;"	f
+_store_enrollment_info	./polls/views.py	/^def _store_enrollment_info(authorForm):$/;"	f
+application	./first/wsgi.py	/^application = get_wsgi_application()$/;"	v
+business_unit	./polls/models.py	/^    business_unit = models.CharField(max_length=100)$/;"	v	class:ContactModel
+business_unit	./polls/views.py	/^    business_unit = forms.ChoiceField(choices = BU_NAMES)$/;"	v	class:ContactForm
+choice	./polls/models.py	/^    choice = models.CharField(max_length=200)$/;"	v	class:Choice
+co_author_employee_num	./polls/models.py	/^    co_author_employee_num = models.IntegerField(default=0)$/;"	v	class:ContactModel
+co_author_employee_num	./polls/views.py	/^    co_author_employee_num = forms.IntegerField(label='Co-Author\\'s employee ID', required=False)$/;"	v	class:ContactForm
+email_address	./polls/models.py	/^    email_address = models.CharField(max_length=50)$/;"	v	class:ContactModel
+employee_number	./polls/models.py	/^    employee_number = models.IntegerField()$/;"	v	class:ContactModel
+employee_number	./polls/views.py	/^    employee_number = forms.IntegerField(label='Employee ID')$/;"	v	class:ContactForm
+enroll	./polls/views.py	/^def enroll(request):$/;"	f
+nsn_intra_id	./polls/models.py	/^    nsn_intra_id =  models.CharField(max_length=10)$/;"	v	class:ContactModel
+nsn_intra_id	./polls/views.py	/^    nsn_intra_id = forms.CharField(label='NSN-INTRA name')$/;"	v	class:ContactForm
+path	./first/wsgi.py	/^path = '\/home\/coach\/enroll'$/;"	v
+poll	./polls/models.py	/^    poll = models.ForeignKey(Poll)$/;"	v	class:Choice
+pub_date	./polls/models.py	/^    pub_date = models.DateTimeField('date published')$/;"	v	class:Poll
+question	./polls/models.py	/^    question = models.CharField(max_length=200)$/;"	v	class:Poll
+svn_repository	./polls/models.py	/^    svn_repository = models.CharField(max_length=100)$/;"	v	class:ContactModel
+test_basic_addition	./polls/tests.py	/^    def test_basic_addition(self):$/;"	m	class:SimpleTest
+urlpatterns	./first/urls.py	/^urlpatterns = patterns('',$/;"	v
+votes	./polls/models.py	/^    votes = models.IntegerField()$/;"	v	class:Choice

@@ -1,0 +1,349 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Hangzhou Technology Center Clean Code Contest 2013 Topic</title>
+  
+  <meta name="description" content="Problem you need to solve Test Harness is a module test framework in BTS UPL1 TX W1PL team which could drive regression test and module test &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://erizhang.github.com/blog/2013/05/13/Nokia-Siemens-Networks-Clean-Code-Contest-2013">
+  <link href="/favicon.png" rel="icon">
+  <link href="stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="Actionary" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/lib/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+
+</head>
+
+<body   >
+  <!--header role="banner"><hgroup>
+  <h1><a href="/">Actionary</a></h1>
+  
+    <h2>A man is valued by his works, not his words!</h2>
+  
+</hgroup>
+
+</header-->
+  <nav role="navigation">
+<!--ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:erizhang.github.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul-->
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Hangzhou Technology Center Clean Code Contest 2013 Topic</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-05-13T00:00:00+08:00" pubdate data-updated="true">May 13<span>th</span>, 2013</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><h2>Problem you need to solve</h2>
+
+<p>Test Harness is a module test  framework in BTS UPL1 TX W1PL team which could drive regression test and module test automatically. After the test finished, Test Harness will output the test result to a test report with HTML format including test case pass ratio\test case status\ message logs, etc.</p>
+
+<p>Before message logs generated, Test Harness needs to retrieve the message definitions from C header files and then analyze the memory dump binary into readable message log. <code>Typeinfo.pm</code> is the module responsible to parse the C header files and extract the type information.</p>
+
+<p><code>TypeInfo.pm</code> can read C code and extract type definitions. It can also apply raw binary data to a type definition which it has read the definition of in the C code and print it out in text  field by field. It’s support:</p>
+
+<ul>
+<li>To Preprocess <code>*.h</code> files. Such as Strip comment, Wrap lines, Macro substitution, file including, etc.</li>
+<li>To Parse complex type definition,  such structure/ union/ enum.</li>
+<li>To Parse abstract type definition, such as recursive structure / union definition.</li>
+<li>Etc, almost all C 89 type definition features. (no consider mess C code)</li>
+</ul>
+
+
+<p>Below example will illustrate the functionalities of the tool usage, for more details you can get the legacy code from <a href="legacycode/TypeInfo_V_1_1_0.zip" title="legacy code of TypeInfo.pm">here</a>, and execute the <code>perl</code> script as legacy given.</p>
+
+<h4>Example: Nested structure sample case:</h4>
+
+<p>If the structure is defined as nested strcture style, like this:</p>
+
+<p>In the <code>a_definition.h</code>:</p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='c'><span class='line'><span class="k">typedef</span> <span class="k">struct</span> <span class="n">_A</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>  <span class="kt">char</span> <span class="n">name</span><span class="p">[</span><span class="mi">16</span><span class="p">];</span>
+</span><span class='line'>    <span class="kt">int</span>  <span class="n">age</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span><span class="n">A_t</span><span class="p">;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>In the <code>b_definition.h</code>, the structure is defined like this:</p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='c'><span class='line'><span class="cp">#include &quot;a_definition.h&quot;</span>
+</span><span class='line'><span class="k">typedef</span> <span class="k">struct</span> <span class="n">_B</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>    <span class="kt">int</span>  <span class="n">id</span><span class="p">;</span>
+</span><span class='line'>    <span class="n">A_t</span>  <span class="n">person</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span><span class="n">B_t</span><span class="p">;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>And raw data from memory dump is:</p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='c'><span class='line'><span class="n">raw_data</span> <span class="o">=</span> <span class="p">{</span><span class="mh">0xC5</span><span class="p">,</span> <span class="mh">0x30</span><span class="p">,</span> <span class="mh">0xA6</span><span class="p">,</span> <span class="mh">0x03</span><span class="p">,</span>
+</span><span class='line'>            <span class="mh">0x46</span><span class="p">,</span> <span class="mh">0x61</span><span class="p">,</span> <span class="mh">0x6b</span><span class="p">,</span> <span class="mh">0x65</span><span class="p">,</span>
+</span><span class='line'>            <span class="mh">0x20</span><span class="p">,</span> <span class="mh">0x53</span><span class="p">,</span> <span class="mh">0x6d</span><span class="p">,</span> <span class="mh">0x69</span><span class="p">,</span>
+</span><span class='line'>            <span class="mh">0x74</span><span class="p">,</span> <span class="mh">0x68</span><span class="p">,</span> <span class="mh">0x00</span><span class="p">,</span> <span class="mh">0x00</span><span class="p">,</span>
+</span><span class='line'>            <span class="mh">0x00</span><span class="p">,</span> <span class="mh">0x00</span><span class="p">,</span> <span class="mh">0x00</span><span class="p">,</span> <span class="mh">0x00</span><span class="p">,</span>
+</span><span class='line'>            <span class="mh">0x1a</span><span class="p">,</span> <span class="mh">0x00</span><span class="p">,</span> <span class="mh">0x00</span><span class="p">,</span> <span class="mh">0x00</span><span class="p">};</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>After execute the tool command:</p>
+
+<pre><code>perl readlog.pl -s B_t -b rawData.bin -i.</code></pre>
+
+
+<blockquote><p>Note: it means shall parse a structure named <code>B_t</code>, and memory dump file is in <code>rawData.bin</code>, the including header path is current directory as <code>-i.</code> indicating (the <code>a_defintion.h</code> and <code>b_definition.h</code> is in current directory).</p></blockquote>
+
+<p>The corresponding output shall be like this:</p>
+
+<pre><code>
+    struct _B {
+        id = 61223109, 0x3a630c5
+        person = struct _A {
+            name = [
+                [0] = 70, 0x46, 'F'
+                [1] = 97, 0x61, 'a'
+                [2] = 107, 0x6b, 'k'
+                [3] = 101, 0x65, 'e'
+                [4] = 32, 0x20, ' '
+                [5] = 83, 0x53, 'S'
+                [6] = 109, 0x6d, 'm'
+                [7] = 105, 0x69, 'i'
+                [8] = 116, 0x74, 't'
+                [9] = 104, 0x68, 'h'
+                [10] = 0, 0x0
+                [11] = 0, 0x0
+                [12] = 0, 0x0
+                [13] = 0, 0x0
+                [14] = 0, 0x0
+                [15] = 0, 0x0
+                ]
+            age = 26, 0x1a
+        }
+    }
+</code></pre>
+
+
+<h2>Your task is:</h2>
+
+<ul>
+    <li>To rewrite the <code>TypeInfo.pm</code> with C/C++, 3rd libraries such as boost is not allowed.</li>
+<li>Write the code in clean manner, with clear design and clean code.</li>
+<li>Unit Testing is mandatory.</li>
+<li>Keep the same functionalities with the original one, provide better interface as you can.</li>
+</ul>
+
+</div>
+
+
+  <footer>
+    <!--p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Eric Zhang</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-05-13T00:00:00+08:00" pubdate data-updated="true">May 13<span>th</span>, 2013</time>
+      
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://erizhang.github.com/blog/2013/05/13/Nokia-Siemens-Networks-Clean-Code-Contest-2013/" data-via="zhangliaoyuan" data-counturl="http://erizhang.github.com/blog/2013/05/13/Nokia-Siemens-Networks-Clean-Code-Contest-2013/" >Tweet</a>
+  
+  
+  
+    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2013/04/27/take-care-of-your-integer-variable/" title="Previous Post: Take care of your integer variables">&laquo; Take care of your integer variables</a>
+      
+      
+    </p-->
+  </footer>
+</article>
+
+</div>
+
+<!--aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2013/05/13/Nokia-Siemens-Networks-Clean-Code-Contest-2013/">Nokia Siemens Networks Clean Code Contest 2013 Topic</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/04/27/take-care-of-your-integer-variable/">Take care of your integer variables</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/04/18/why-i-translate-codermetrics/">我为什么翻译《程序员度量》</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/04/12/programming-game-of-life-under-no-if-dot-else-dot-etc-condition-restriction/">Coderetreat: programming game of life under 'no conditional expression' restriction</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/03/23/team-gethering-game/">Team Gathering Game</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+
+
+
+  
+</aside-->
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2013 - Nokia Siemens Networks -
+  <span class="credit">Powered by <a href="https://workspaces.emea.nsn-net.net/sites/HZTC/default.aspx">Nokia Siemens Networks Hangzhou Technology Center</a></span>
+</p>
+
+</footer>
+  
+
+<!--script type="text/javascript">
+      var disqus_shortname = 'actionary';
+      
+        
+        var disqus_script = 'count.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) {return;}
+  js = d.createElement(s); js.id = id; js.async = true;
+  js.src = "//connect.facebook.net/en_US/all.js#appId=212934732101925&xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script-->
+
+
+
+
+
+</body>
+</html>

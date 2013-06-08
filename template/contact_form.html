@@ -1,0 +1,121 @@
+<html>
+    <head>
+        <title>Nokia Siemens Networks Clean Code Contest 2013 Enroll</title>
+        <style type="text/css">
+            body
+            {
+                background-image: url(/ccc2013/style/images/bg.png);
+            }
+            
+            .content {
+            		width: 100%;
+            		height: 600px;
+            		margin: 0px;
+            		padding: 0px;
+            		background: url(/ccc2013/style/images/small-butterfly.png) no-repeat top right;
+            }
+            
+            .logor {
+            	  width: 100%;
+            		float: left;
+            }
+            
+            .titler {
+            		float: left;
+            		font-size: 40px;
+                font-family: Arial;
+                
+                padding: 10px 30px;
+            }
+            
+            .enrollform {
+            	  width: 100%;
+            		float: left;
+            		padding: 10px 30px;
+            		font-size: 18px;
+            }
+            
+            input[type=text] , select{
+            	font-size: 18px;
+							width: 288px;
+							height: 33px;
+							line-height: 33px;
+            	border: 1px solid rgb(160, 160, 160);
+            	border-radius: 3px 3px 3px 3px;
+							box-shadow: 0px 0px 0px rgb(0, 0, 0), 0px 3px 3px rgb(238, 238, 238) inset;
+            }
+            
+            input[type=submit] {
+            	font-size: 22px;
+            	margin: 0px 50px;
+            	padding: 0px 30px;
+            }
+           
+            
+            .infos {
+            	width: 100%;
+            	font-size: 18px;
+              font-family: Arial;
+            	float: left;
+            }
+            
+       </style>
+        <!--link rel="stylesheet" type="text/css" href="/ccc2013/style/enroll.css"/-->
+    </head>
+
+    <body>
+    	<div class="content">
+    		<div class="logor">
+            <img src="/ccc2013/style/images/logo.png"  width="200" height="110"/>
+        </div>
+        <div class="titler">
+            Welcome to enroll<br/>Nokia Siemens Networks Hangzhou TC <br/>Clean Code Contest 2013
+        </div>
+        
+        <div class="enrollform">
+             <form class="formAlign" action="/ccc2013/enroll/" method="post">{% csrf_token %}                                                                                      
+                {{ authorForm.as_p }}                                                                                                                                             
+                {{ coAuthorForm.as_p }}                                                                                                                                           
+                <input type="submit" value="Submit" />                                                                                                                            
+                                                                                                                                                                                  
+                <a href="/ccc2013/style/Clean-Code-Contest-2013.html">竞赛题目 Understand Contest Topic</a>                                                                                
+            </form>
+        </div>
+        
+        
+        <div class="infos">
+        	<ul>
+				<li>Top 3 winners will be selected by official judges</li>
+				<li>Top 3 winners will get surprize award</li>
+				<li>All participants who finishes the contest programming will get a small gift</li>
+				<li>Contest period: May 13th, 2013 -- June 30th, 2013</li>
+            </ul>
+        </div>
+           
+<!--
+						<!--
+            <h1 class="subject">
+            Welcome Enroll<br/>Nokia Siemens Networks Hangzhou TC <br/>Clean Code Contest 2013
+            </h1>
+			<ul class="descriptionAlign">
+				<li>Top 3 winners will be selected by official judegs</li>
+				<li>Top 3 winners will get surprize award</li>
+				<li>All participants who finishes the contest programming will get a small gift</li>
+				<li>Contest period: May 13th, 2013 -- June 30th, 2013</li>
+            </ul>
+
+        <div>
+            <form class="formAlign" action="/ccc2013/enroll/" method="post">{% csrf_token %}
+                {{ authorForm.as_p }}
+                {{ coAuthorForm.as_p }}
+                <input type="submit" value="Submit" />
+
+			    <a href="/ccc2013/style/Clean-Code-Contest-2013.html">Understand Contest Topic(Task you need to finish)</a>
+            </form>
+        </div>
+        -->
+      </div>
+    </body>
+</html>
+
+
