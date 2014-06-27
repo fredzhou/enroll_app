@@ -11,4 +11,3 @@ class ContactModel(models.Model):
 
     def __unicode__(self):
         return nsn_intra_id + ', ' + str(self.employee_number)
-# test git client
