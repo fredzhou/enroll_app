@@ -102,34 +102,37 @@ def _notify_candidate(to, msg_body):
     s.sendmail(SENDER, [to], msg.as_string())
     s.quit()
 
+def _post(request):
+    authorForm = ContactForm(request.POST) # A form bound to the POST data
+    if not authorForm.is_valid():
+        return render(request, 'template/contact_form.html', {
+                    'authorForm': authorForm,
+                })
+
+    nsn_intra_id = authorForm.cleaned_data['nsn_intra_id']
+    if not _is_uid_employNumber_matched(nsn_intra_id, authorForm.cleaned_data['employee_number']):
+        return render(request, 'template/account_error.html', {})
+
+    repos_address = HTTP_ADDRESS + authorForm.cleaned_data['nsn_intra_id']
+    repos_address_notification = 'Here comes the url for contest svn repository, Please login with your nsn-intra name and password ' + repos_address
+
+    to_mail = _fetch_mail_addressd(nsn_intra_id)
+
+    if not _store_enrollment_info(authorForm):
+        _notify_candidate(to_mail, repos_address_notification)
+        return render(request, 'template/user_existed.html', {'repos_address': repos_address})
+
+    _create_repository(nsn_intra_id)
+    _add_user_right_for_repository(nsn_intra_id)
+
+    _notify_candidate(to_mail, repos_address_notification)
+
+    return render(request, 'template/enroll_successful.html', {'repos_address': repos_address})
 
 def enroll(request):
     if request.method == 'POST': # If the form has been submitted...
-        authorForm = ContactForm(request.POST) # A form bound to the POST data
-        if not authorForm.is_valid():
-            return render(request, 'template/contact_form.html', {
-                        'authorForm': authorForm,
-                    })
-
-        nsn_intra_id = authorForm.cleaned_data['nsn_intra_id']
-        if not _is_uid_employNumber_matched(nsn_intra_id, authorForm.cleaned_data['employee_number']):
-            return render(request, 'template/account_error.html', {})
-
-        repos_address = HTTP_ADDRESS + authorForm.cleaned_data['nsn_intra_id']
-        repos_address_notification = 'Here comes the url for contest svn repository, Please login with your nsn-intra name and password ' + repos_address
-
-        to_mail = _fetch_mail_addressd(nsn_intra_id)
-
-        if not _store_enrollment_info(authorForm):
-            _notify_candidate(to_mail, repos_address_notification)
-            return render(request, 'template/user_existed.html', {'repos_address': repos_address})
-
-        _create_repository(nsn_intra_id)
-        _add_user_right_for_repository(nsn_intra_id)
-
-        _notify_candidate(to_mail, repos_address_notification)
-
-        return render(request, 'template/enroll_successful.html', {'repos_address': repos_address})
+        html = _post(request)
+        return html
     else:
         authorForm = ContactForm() # An unbound form
 
